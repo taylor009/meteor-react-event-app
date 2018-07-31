@@ -1,13 +1,23 @@
 import React from 'react';
+import AddEvent from './AddEvent';
+import {withTracker} from 'meteor/react-meteor-data';
+import {Events} from '../api/events';
 
-class Todo extends React.Component{
+class EventApp extends React.Component{
     render(){
         return(
             <div>
-                Hello World
+                <AddEvent/>
+                <pre>DB: Stuff: {JSON.stringify(this.props, null, ' ')}</pre>
             </div>
         );
     }
 }
 
-export default Todo;
+const App = withTracker(() => {
+    return {
+        events: Events.find({}).fetch()
+    }
+})(EventApp);
+
+export default App;
