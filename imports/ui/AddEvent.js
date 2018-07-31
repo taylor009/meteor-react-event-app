@@ -10,10 +10,25 @@ class AddEvent extends React.Component{
         }
     }
     handleChange = (event) => {
-        const field = event.target.name;
+       event.preventDefault();
 
+        const { title, description, date } = this.state;
+
+        // TODO: Create backend Meteor methods to save created events
+        // alert("Will be Saved in a little bit :)")
+
+        // add method `insert` to db
+        Events.insert({
+            title,
+            description,
+            date
+        });
+
+        // clears input fields onSubmit
         this.setState({
-            [field]: event.target.value
+            title: "",
+            description: "",
+            date: ""
         })
     };
 
